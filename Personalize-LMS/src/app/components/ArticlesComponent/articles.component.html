@@ -1,0 +1,10 @@
+<div class="articles-container">
+    <div class="article-card" *ngFor="let article of articles" (click)="openLink(article.link)">
+      <div class="text-content">
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.description }}</p>
+      </div>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxDSjeWJpJCnud26x_qDoCnmArdo-TqwmvfA&s" alt="Thumbnail" />
+    </div>
+  </div>
+  

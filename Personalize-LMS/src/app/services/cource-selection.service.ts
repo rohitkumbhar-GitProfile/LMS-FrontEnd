@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CourceSelectionService {
 
-  private apiUrl = 'https://localhost:7058/api/Ai/';
+  private apiUrl = 'http://localhost:7058/api/Ai/';
 
   constructor(private http: HttpClient) { }
 
@@ -33,7 +33,7 @@ export class CourceSelectionService {
       cources: courses
     };
        
-    return this.http.post('https://localhost:7058/api/User/AssignCourses', JSON.stringify(requestBody), {
+    return this.http.post('http://localhost:7058/api/User/AssignCourses', JSON.stringify(requestBody), {
       headers: {
         'Content-Type': 'application/json'
       }

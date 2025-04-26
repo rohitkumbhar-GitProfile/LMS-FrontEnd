@@ -14,7 +14,7 @@ export class QuizService {
     const prompt = `Generate a multiple-choice quiz on the topic "${topic}". Return ONLY valid JSON as an array of exactly 5 questions. 
     Each question must include a 'question' (string), 'options' (array of strings), and a correct 'answer' (string). 
     Do NOT include any extra text, explanation, markdown, or notes — only return pure JSON.`;
-        return this.http.post(`https://localhost:7058/api/Ai/Quiz`, JSON.stringify(prompt), {
+        return this.http.post(`http://localhost:7058/api/Ai/Quiz`, JSON.stringify(prompt), {
      // responseType: 'text',
       headers: {
         'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ export class QuizService {
       QuizScore:quizScore
     };
 
-    return this.http.post('https://localhost:7058/api/User/UpdateScore', JSON.stringify(requestBody), {
+    return this.http.post('http://localhost:7058/api/User/UpdateScore', JSON.stringify(requestBody), {
       headers: {
         'Content-Type': 'application/json'
       }

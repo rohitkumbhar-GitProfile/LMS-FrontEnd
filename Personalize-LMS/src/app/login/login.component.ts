@@ -46,7 +46,14 @@ export class LoginComponent {
         this.errorMessage = '';
         this.showToast = false;
         localStorage.setItem('UserData', JSON.stringify(res.result));
-        this.router.navigate(['/courses']);
+        const userProfile = localStorage.getItem('userProfile');
+        if (userProfile) {
+          // If user profile exists, go to courses
+          this.router.navigate(['/courses']);
+        } else {
+          // If no profile, send user to user-profile page
+          this.router.navigate(['/user-profile']);
+        }
         this.isSubmitting = false; // Hide loading spinner
       },
       error: (err) => {
@@ -75,15 +82,31 @@ export class LoginComponent {
     }
 
     // Call your registration API here
-    console.log('Registration data:', {
-      username: this.username,
-      email: this.email,
-      mobile: this.mobile,
-      interest: this.interest,
+    this.authser.register(this.username, this.password, this.email, this.mobile, this.interest).subscribe({
+      next: (res) => {
+        this.errorMessage = '';
+        this.showToast = false;
+        localStorage.setItem('UserData', JSON.stringify(res.result));
+        const userProfile = localStorage.getItem('userProfile');
+        if (userProfile) {
+          // If user profile exists, go to courses
+          this.router.navigate(['/courses']);
+        } else {
+          // If no profile, send user to user-profile page
+          this.router.navigate(['/user-profile']);
+        }
+        this.isSubmitting = false; // Hide loading spinner
+      },
+      error: (err) => {
+        console.error('Login error:', err);
+        this.errorMessage = 'Login failed. Please check your credentials.';
+        this.showToast = true;
+        this.isSubmitting = false; // Hide loading spinner
+      },
     });
 
     // On successful registration, switch to login
-    this.switchToLogin();
+    this.router.navigate(['/user-profile']);
     this.isSubmitting = false; // Hide loading spinner
   }
 

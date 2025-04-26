@@ -1,0 +1,134 @@
+<div class="login-container d-flex align-items-center justify-content-center vh-100">
+    <div class="card shadow-lg login-card p-4" style="width: 100%; max-width: 500px;">
+      <h4 class="text-center mb-4">Complete Your Profile</h4>
+  
+      <form (submit)="onSubmit(); $event.preventDefault()" #profileForm="ngForm">
+        <div class="mb-3">
+          <label for="currentJob" class="form-label">Current Job</label>
+          <input
+            type="text"
+            id="currentJob"
+            class="form-control"
+            [(ngModel)]="currentJob"
+            name="currentJob"
+            placeholder="Enter your current job"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="educationLevel" class="form-label">Education Level</label>
+          <input
+            type="text"
+            id="educationLevel"
+            class="form-control"
+            [(ngModel)]="educationLevel"
+            name="educationLevel"
+            placeholder="Enter your highest education level"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="fieldOfStudy" class="form-label">Field of Study</label>
+          <input
+            type="text"
+            id="fieldOfStudy"
+            class="form-control"
+            [(ngModel)]="fieldOfStudy"
+            name="fieldOfStudy"
+            placeholder="Enter your field of study"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="currentSkills" class="form-label">Current Skills</label>
+          <input
+            type="text"
+            id="currentSkills"
+            class="form-control"
+            [(ngModel)]="currentSkills"
+            name="currentSkills"
+            placeholder="E.g., JavaScript, Python"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="interestedSkills" class="form-label">Interested Skills</label>
+          <input
+            type="text"
+            id="interestedSkills"
+            class="form-control"
+            [(ngModel)]="interestedSkills"
+            name="interestedSkills"
+            placeholder="E.g., AI, Machine Learning"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="passion" class="form-label">Passion</label>
+          <input
+            type="text"
+            id="passion"
+            class="form-control"
+            [(ngModel)]="passion"
+            name="passion"
+            placeholder="What are you passionate about?"
+            required
+          />
+        </div>
+  
+        <div class="mb-3">
+          <label for="goal" class="form-label">Goal</label>
+          <input
+            type="text"
+            id="goal"
+            class="form-control"
+            [(ngModel)]="goal"
+            name="goal"
+            placeholder="State your goal"
+            required
+          />
+        </div>
+  
+        <button
+          class="btn btn-primary w-100 mt-3"
+          type="submit"
+          [disabled]="!profileForm.form.valid || isSubmitting"
+        >
+          <span *ngIf="!isSubmitting">Submit</span>
+          <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Toast Notification (Bottom-Right) -->
+  <div
+    class="toast-container position-fixed bottom-0 end-0 p-3"
+    style="z-index: 1055"
+  >
+    <div
+      *ngIf="showToast"
+      class="toast align-items-center text-white bg-danger border-0 show"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex">
+        <div class="toast-body">
+          {{ errorMessage }}
+        </div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          aria-label="Close"
+          (click)="hideToast()"
+        ></button>
+      </div>
+    </div>
+  </div>
+  

@@ -7,6 +7,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { QuizComponent } from './app/components/quiz/quiz.component';
 import { AppComponent } from './app/app.component';
 import { LandingPageComponent } from './app/landing-page/landing-page.component';
+import { UserProfileComponent } from './app/components/user-profile.component/user-profile.component';
+import { ArticlesComponent } from './app/components/ArticlesComponent/articles.component';
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
@@ -17,6 +19,8 @@ bootstrapApplication(AppComponent, {
       { path: 'course-platform', component: CoursePlatformComponent },
       { path: 'course-platform/:courseId', component: CoursePlatformComponent },
       { path: 'quiz/:courseId', component: QuizComponent },
+      { path: 'user-profile', component: UserProfileComponent},
+      { path: 'articles', component: ArticlesComponent }
 
     ])
   ]

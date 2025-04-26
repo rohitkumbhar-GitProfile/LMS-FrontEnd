@@ -19,9 +19,11 @@ export class CourseSelectionComponent implements OnInit {
 
   courseList: any[] = [];
   user:any={};
+  userProfile:any={};
   ngOnInit(): void {
     const storedCourseList = localStorage.getItem('courseList');
     const UserData = localStorage.getItem('UserData');
+    const UserProfile = localStorage.getItem('UserProfile');
     if (storedCourseList != null || storedCourseList != undefined) {
 
       this.courseList = JSON.parse(storedCourseList);
@@ -49,17 +51,36 @@ export class CourseSelectionComponent implements OnInit {
       if(UserData !=null || UserData != undefined){
         this.user=JSON.parse(UserData);  
       }
-      
-      const prompt = `Return a list of courses related to "${this.user.areaOfIntrest}" strictly in the exact following JSON format. Do not include any extra text, explanations, or variations. Any deviation from this format will cause the application to break. Ensure each "image" value is a valid image URL.
 
-      [
-        {
-          "id": number,
-          "title": "string",
-          "description": "string",
-          "image": "valid_image_url"
-        }
-      ]`;
+      if(UserProfile !=null || UserProfile != undefined){
+        this.userProfile=JSON.parse(UserProfile);  
+      }
+      
+      // If no data in localStorage, make the API call
+      const prompt = `
+Based on the following user profile, return a list of recommended courses. Strictly follow the exact JSON format provided below. Do not include any extra text, explanations, or variations. Any deviation from this format will cause the application to break. Ensure each "image" value is a valid image URL.
+
+User Profile:
+- Current Job: ${this.userProfile.currentJob}
+- Education Level: ${this.userProfile.educationLevel}
+- Field of Study: ${this.userProfile.fieldOfStudy}
+- Current Skills: ${this.userProfile.currentSkills}
+- Interested Skills: ${this.userProfile.interestedSkills}
+- Passion: ${this.userProfile.passion}
+- Goal: ${this.userProfile.goal}
+- Area of Interest: ${this.userProfile.areaOfInterest}
+
+Return in this JSON format:
+
+[
+  {
+    "id": number,
+    "title": "string",
+    "description": "string",
+    "image": "valid_image_url"
+  }
+]
+`;
       
   
       this.courseSelection.selectCource(prompt).subscribe({
